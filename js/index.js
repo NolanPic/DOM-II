@@ -36,7 +36,9 @@ const WORDS = [
 ];
 
 const state = {
-    scale: '1'
+    scale: '1',
+    Os: 'O',
+    bus: 'Fun'
 };
 
 // grab all elements and set their transition
@@ -71,3 +73,54 @@ window.addEventListener('scroll', () => {
 
     state.scale = newScale;
 });
+
+// EVENT THREE -- click
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach(el => {
+    el.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation(); // <-- MVP GOAL
+        e.target.textContent = '😝';
+        e.target.style.transition = '1s';
+        e.target.style.transform = 'scale(2)';
+    });
+});
+
+// EVENT FOUR -- click 2
+const header = document.querySelector('header');
+header.addEventListener('click', () => {
+    state.bus = state.bus === 'Fun' ? 'Unfun' : 'Fun';
+    document.querySelector('.logo-heading').textContent = state.bus + ' Bus';
+});
+
+const body = document.querySelector('body');
+const msg = document.querySelector('#msg');
+
+// EVENT FIVE -- resize
+window.addEventListener('resize', () => {
+    let startText = 'STO';
+    state.Os += 'OO';
+    startText += state.Os;
+    startText += 'P';
+
+    msg.style.wordBreak = 'break-all';
+    msg.style.fontSize = '50px';
+    msg.textContent = startText;
+    
+});
+
+// EVENT SIX -- mouseenter
+const images = document.querySelectorAll('img')
+images.forEach(img => {
+    img.addEventListener('mouseenter', () => {
+        img.style.opacity = '0.5';
+    });
+});
+
+// EVENT SEVEN -- mouseleave
+images.forEach(img => {
+    img.addEventListener('mouseleave', () => {
+        img.style.opacity = '1';
+    });
+});
+
